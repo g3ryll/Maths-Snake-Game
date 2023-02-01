@@ -43,7 +43,7 @@ class CORRECT:
 
 	def draw_correct(self):
 		correct_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
-		pygame.draw.rect(screen, cinnabar, correct_rect)
+		pygame.draw.rect(screen, dark_fern, correct_rect)
 
 	def randomize(self):
 		self.x = random.randint(0, cell_number - 1)
