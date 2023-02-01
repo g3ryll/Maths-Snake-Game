@@ -37,13 +37,37 @@ class SNAKE:
 	def add_block(self):
 		self.new_block = True
 
-class FRUIT:
+class CORRECT:
 	def __init__(self):
 		self.randomize()
 
-	def draw_fruit(self):
-		fruit_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
-		pygame.draw.rect(screen, cinnabar, fruit_rect)
+	def draw_correct(self):
+		correct_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
+		pygame.draw.rect(screen, cinnabar, correct_rect)
+
+	def randomize(self):
+		self.x = random.randint(0, cell_number - 1)
+		self.y = random.randint(0, cell_number - 1)
+		self.pos = Vector2(self.x, self.y)
+class WRONG1:
+	def __init__(self):
+		self.randomize()
+
+	def draw_wrong1(self):
+		wrong1_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
+		pygame.draw.rect(screen, cinnabar, wrong1_rect)
+
+	def randomize(self):
+		self.x = random.randint(0, cell_number - 1)
+		self.y = random.randint(0, cell_number - 1)
+		self.pos = Vector2(self.x, self.y)
+class WRONG2:
+	def __init__(self):
+		self.randomize()
+
+	def draw_wrong2(self):
+		wrong2_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
+		pygame.draw.rect(screen, cinnabar, wrong2_rect)
 
 	def randomize(self):
 		self.x = random.randint(0, cell_number - 1)
@@ -53,7 +77,9 @@ class FRUIT:
 class MAIN:
 	def __init__(self):
 		self.snake = SNAKE()
-		self.fruit = FRUIT()
+		self.correct = CORRECT()
+		self.wrong1 = WRONG1()
+		self.wrong2 = WRONG2()
 
 	def update(self):
 		self.snake.move_snake()
@@ -61,13 +87,17 @@ class MAIN:
 		self.check_fail()
   
 	def draw_elements(self):
-		self.fruit.draw_fruit()
+		self.correct.draw_correct()
+		self.wrong1.draw_wrong1()
+		self.wrong2.draw_wrong2()
 		self.snake.draw_snake()
 		self.draw_score()
 
 	def check_collision(self):
-		if self.fruit.pos == self.snake.body[0]:
-			self.fruit.randomize()
+		if self.correct.pos == self.snake.body[0]:
+			self.correct.randomize()
+			self.wrong1.randomize()
+			self.wrong2.randomize()
 			self.snake.add_block()
 
 	def check_fail(self):
